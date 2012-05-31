@@ -1,0 +1,50 @@
+  15 Dec 2011
+
+  - list of NEids send to the client for fetchRRD instead of one to avoid excess net/msg overhead
+  - clear() specific client
+  - fetchlast() TimeUnit.5MIN, TimeUnit.LASTUPDATE
+  - free(malloc) (char *)consolFunc
+  - expiry on Messages
+  - MBean per Instance-ID aggregate by listening-Queue
+  - exception handling in RoutingMonitorMXBean.
+  - super-class HornetQTestCase encapsulating testing (connection, sendMessage(CommandMessage)
+  - implement InstanceAggregator
+
+  - Set<> implement equals()
+  - @ConcurrencyManagement(ConcurrencyManagementType.CONTAINER) or BEAN (ConcurrentHashMap vs HashMap)
+  - Remove IDENT pretty print from output json messages
+
+
+http://casper.rd.forthnet.gr:8080/svc-rrd-rest/fetchLast&ne=1005255&rras[]=cpu5sec&rras[]=cpu1min&rras[]=memutil
+
+http://casper.rd.forthnet.gr:8080/svc-rrd-rest/fetchGraph&ne=21100799&timespan=0&group=bw&titleX=Bandwidth&titleY=bps
+
+http://klnnms01.forthnet.prv/NMS/ServiceRRDWSInvoker.php?type=fetchLast&ne=1005255&rras[]=cpu5sec&rras[]=cpu1min&rras[]=memutil
+
+http://klnnms01.forthnet.prv/NMS/ServiceRRDWSInvoker.php?type=fetchGraph&ne=21100799&timespan=0&group=bw&titleX=Bandwidth&titleY=bps
+
+
+<jms-destinations>
+	<jms-queue name="svc_rrd">
+		<entry name="queue/svc_rrd"/>
+	</jms-queue>
+	<jms-queue name="svc_rrd_reply">
+		<entry name="queue/svc_rrd_reply"/>
+	</jms-queue>
+	<jms-queue name="svc_rrd_aggr_reply">
+		<entry name="queue/svc_rrd_aggr_reply"/>
+	</jms-queue>
+	<jms-queue name="klnnms01/svc_rrd">
+		<entry name="queue/klnnms01/svc_rrd"/>
+	</jms-queue>
+	<jms-queue name="klnnms02/svc_rrd">
+		<entry name="queue/klnnms02/svc_rrd"/>
+	</jms-queue>
+	<jms-queue name="klnnms03/svc_rrd">
+		<entry name="queue/klnnms03/svc_rrd"/>
+	</jms-queue>
+	<jms-topic name="svc_rrd_ctrl_bus">
+		<entry name="topic/svc_rrd_ctrl_bus"/>
+	</jms-topic>
+</jms-destinations>
+                

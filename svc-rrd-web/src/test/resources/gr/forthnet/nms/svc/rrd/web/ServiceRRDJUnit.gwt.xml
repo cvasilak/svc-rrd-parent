@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module>
+  <!-- Inherit our applications main module.                      -->
+  <inherits name='gr.forthnet.nms.svc.rrd.web.ServiceRRD' />
+
+  <!-- Specify the path to any remote services.                   -->
+  <servlet path="/ServiceRRD/greet" class="gr.forthnet.nms.svc.rrd.web.server.GreetingServiceImpl" />
+
+</module>

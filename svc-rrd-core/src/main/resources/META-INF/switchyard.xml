@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<switchyard xmlns="urn:switchyard-config:switchyard:1.0" name="svcrrd">
+    <composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912" name="svcrrd" targetNamespace="urn:svcrrd:transform-json:0.1.0">
+        <service name="ControlBusRouteBuilder" promote="ControlBusRouteBuilder">
+            <binding.camel xmlns="urn:switchyard-component-camel:config:1.0" configURI="jms:topic:svc_rrd_ctrl_bus?connectionFactory=#JmsXA"/>
+        </service>
+        <component name="ControlBusRouteBuilder">
+            <implementation.camel xmlns="urn:switchyard-component-camel:config:1.0">
+                <java class="gr.forthnet.nms.svc.rrd.core.routes.ControlBusRouteBuilder"/>
+            </implementation.camel>
+            <service name="ControlBusRoute">
+                <interface.java interface="gr.forthnet.nms.svc.rrd.core.routes.ControlBusRoute"/>
+            </service>
+        </component>
+        <service name="ServiceRRDRouteBuilder" promote="ServiceRRDRouteBuilder">
+            <binding.camel xmlns="urn:switchyard-component-camel:config:1.0" configURI="jms:svc_rrd?connectionFactory=#JmsXA"/>
+        </service>
+        <component name="ServiceRRDRouteBuilder">
+            <implementation.camel xmlns="urn:switchyard-component-camel:config:1.0">
+                <java class="gr.forthnet.nms.svc.rrd.core.routes.ServiceRRDRouteBuilder"/>
+            </implementation.camel>
+            <service name="ServiceRRDRoute">
+                <interface.java interface="gr.forthnet.nms.svc.rrd.core.routes.ServiceRRDRoute"/>
+            </service>
+        </component>
+        <service name="ServiceRRDAggregationRouteBuilder" promote="ServiceRRDAggregationRouteBuilder">
+            <binding.camel xmlns="urn:switchyard-component-camel:config:1.0" configURI="jms:svc_rrd_aggr_reply?connectionFactory=#JmsXA"/>
+        </service>
+        <component name="ServiceRRDAggregationRouteBuilder">
+            <implementation.camel xmlns="urn:switchyard-component-camel:config:1.0">
+                <java class="gr.forthnet.nms.svc.rrd.core.routes.ServiceRRDAggregationRouteBuilder"/>
+            </implementation.camel>
+            <service name="ServiceRRDAggregationRoute">
+                <interface.java interface="gr.forthnet.nms.svc.rrd.core.routes.ServiceRRDAggregationRoute"/>
+            </service>
+        </component>
+    </composite>
+</switchyard>
